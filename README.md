@@ -1,4 +1,5 @@
-# The Levitite Fields
+<img width="2048" height="567" alt="levitite_fields_alt_title" src="https://github.com/user-attachments/assets/250d58dd-b241-4ba1-b7ef-b9d4089229e4" />
+
 ## Features
 A biome where floating levitite clusters generate
 
