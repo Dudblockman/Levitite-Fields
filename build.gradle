@@ -3,6 +3,7 @@ import org.gradle.api.artifacts.Configuration
 plugins {
     id 'java'
     id 'net.neoforged.gradle.userdev' version '7.1.25'
+    id "com.hypherionmc.modutils.modpublisher" version "${modpublisherversion}"
 }
 
 version = project.mod_version
@@ -58,4 +59,68 @@ configurations.configureEach {
             force 'org.ow2.asm:asm-analysis:9.7'
         }
     }
+}
+publisher {
+    // Setup the required API keys. You only need to define the keys for
+    // the platforms you plan on uploading to
+    apiKeys {
+        // Modrinth Token
+        modrinth System.getenv("MODRINTH_TOKEN")
+        // Curseforge Token
+        curseforge System.getenv("CURSE_TOKEN")
+        // GitHub Token
+        github System.getenv("GITHUB_TOKEN")
+    }
+
+    // Enable Debug mode. When enabled, no files will actually be uploaded
+    setDebug(true)
+
+    // Curseforge Project ID
+    setCurseID("${curseforgeid}")
+
+    // Modrinth Project ID
+    setModrinthID("${modrinthid}")
+
+    // Type of release. beta, alpha or release
+    setVersionType("${releasetype}")
+
+    // Changelog. This can be a file, string, OR, gist/github url
+    // For example: markdown.md, or "This is my changelog"
+    // Or: https://raw.githubusercontent.com/hypherionmc/changelogs/changelog.md
+    // Or https://gist.githubusercontent.com/hypherionmc/92f825d3c9337964cc77c9c8c9bf65e6/raw/ceeaaee5b98c688a23398864fe480b84796a1651/test_gist.md
+    setChangelog("${changelogstring}")
+
+    // Required for Modrinth/GitHub
+    setVersion("${minecraft_version}-${project.version}")
+
+    // Fancy display name for the upload.
+    // Will default to the project version if not set
+    setDisplayName("Levitite Fields-${minecraft_version}-${project.version}")
+
+    // The supported game versions
+    setGameVersions("${minecraft_version}")
+
+    // The modloaders your upload supports.
+    // This can also be an Enum from ModLoader,
+    // like setLoaders(ModLoader.FABRIC, ModLoader.FORGE)
+    setLoaders("neoforge")
+
+    // The new Curseforge Environment tag. Optional
+    // Valid values are "server", "client" or "both"
+    // You can also use CurseEnvironment.BOTH, or CurseEnvironment.SERVER or CurseEnvironment.CLIENT
+    setCurseEnvironment("server")
+
+    // The file to be uploaded. This can be a file, task, or string.
+    // setArtifact("build/libs/mymod.jar")
+    // setArtifact(jar.getArchiveFile().get())
+    // If this is a task, the task specified will be executed before publishing
+    setArtifact("build/libs/*.jar")
+
+
+    // Disable the built in Fractureizer scanner
+    setDisableMalwareScanner(false)
+
+    // Safety check to check if the artifact contains a valid mod metadata entry,
+    // which could possibly mean that the jar is empty
+    setDisableEmptyJarCheck(false)
 }

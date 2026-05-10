@@ -25,3 +25,4 @@ run
 /runs/client/config/fml.toml
 /runs/client/downloads/log.json
 runs
+/apikeys.env
