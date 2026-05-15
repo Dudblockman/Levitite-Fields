@@ -70,7 +70,6 @@ public class LevititeOreClusterFeature extends Feature<LevititeOreClusterConfig>
 
                         BlockPos candidate = new BlockPos(bx, by, bz).immutable();
 
-                        // Guard against writing outside the generation region
                         if (!level.ensureCanWrite(candidate)) continue;
 
                         level.setBlock(candidate, config.stateProvider()

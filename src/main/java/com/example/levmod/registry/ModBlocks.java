@@ -13,11 +13,6 @@ public class ModBlocks {
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(LevMod.MOD_ID);
 
-    // ── Blocks ────────────────────────────────────────────────────────────────
-
-
-
-    /** Invisible marker block placed by the worldgen feature. Never obtainable. */
     public static final DeferredBlock<LevititeSpawnerBlock> LEVITITE_SPAWNER =
             BLOCKS.register("levitite_spawner", LevititeSpawnerBlock::new);
 

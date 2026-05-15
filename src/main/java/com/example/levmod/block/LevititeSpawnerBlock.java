@@ -20,13 +20,15 @@ public class LevititeSpawnerBlock extends BaseEntityBlock {
         super(BlockBehaviour.Properties.of()
                 .noCollission()
                 .noOcclusion()
-                .noLootTable()
-                .air());
+                .noLootTable());
     }
+
+    private static final MapCodec<LevititeSpawnerBlock> CODEC =
+            MapCodec.unit(LevititeSpawnerBlock::new);
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
-        return null;
+        return CODEC;
     }
 
     @Override
